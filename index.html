@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>טבלת חיסור</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 16px;
+      background-color: #f7f7f7;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #eaeaea;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>טבלת חיסור מהמספר שהוזן</h2>
+<label for="inputNum">הכנס מספר:</label>
+<input type="number" id="inputNum" oninput="updateTable()" placeholder="למשל: 25"/>
+
+<table>
+  <thead>
+    <tr>
+      <th>רכיב</th>
+      <th>נקי</th>
+      <th> הרחקה</th>
+      <th>x2 הרחקה</th>
+    </tr>
+  </thead>
+  <tbody id="tableBody">
+    <tr>
+      <td>רחב</td>
+      <td data-val="15.8"></td>
+      <td data-val="18.3"></td>
+      <td data-val="20.8"></td>
+    </tr>
+    <tr>
+      <td>צר</td>
+      <td data-val="14.4"></td>
+      <td data-val="16.9"></td>
+      <td data-val="19.4"></td>
+    </tr>
+    <tr>
+      <td>זכוכית</td>
+      <td data-val="13.3"></td>
+      <td data-val="15.8"></td>
+      <td data-val="18.3"></td>
+      
+    </tr>
+  </tbody>
+</table>
+
+<script>
+  function updateTable() {
+    const input = parseFloat(document.getElementById('inputNum').value);
+    const cells = document.querySelectorAll('[data-val]');
+
+    cells.forEach(cell => {
+      const original = parseFloat(cell.getAttribute('data-val'));
+      if (!isNaN(input)) {
+        cell.textContent = (input - original).toFixed(1);
+      } else {
+        cell.textContent = ''; // ריק אם אין קלט
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
